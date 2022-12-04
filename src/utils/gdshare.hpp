@@ -1,6 +1,9 @@
 #pragma once
 
-#include "../offsets.hpp"
+#include <string>
+#include <vector>
+#include <stdint.h>
+#include <gd.h>
 
 enum ExportFormat {
     gmd = 0,

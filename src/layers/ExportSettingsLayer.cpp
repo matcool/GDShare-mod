@@ -2,6 +2,8 @@
 #include <direct.h>
 #include <shlobj_core.h>
 #include "../utils/gdshare.hpp"
+#include "../offsets.hpp"
+#include <nfd.h>
 
 static std::string workdir() {
     char buff[FILENAME_MAX];

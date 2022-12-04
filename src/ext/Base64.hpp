@@ -1,5 +1,4 @@
-#ifndef _GDCRYPTO_BASE64_HPP
-#define _GDCRYPTO_BASE64_HPP
+#pragma once
 
 #include <vector>
 #include <string>
@@ -177,5 +176,3 @@ namespace gdcrypto::base64
 		}
 	};
 }	
-
-#endif /* _GDCRYPTO_BASE64_HPP */

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <gd.h>
+#include <MinHook.h>
 #include "../offsets.hpp"
 
 class LevelInfoLayer : public cocos2d::CCLayer,

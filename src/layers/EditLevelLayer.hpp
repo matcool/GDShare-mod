@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../offsets.hpp"
+#include <gd.h>
+#include <MinHook.h>
 
 class EditLevelLayer :
     public cocos2d::CCLayer,

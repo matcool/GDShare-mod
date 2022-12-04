@@ -1,5 +1,4 @@
-#ifndef _GDCRYPTO_ZLIBHELPER_HPP
-#define _GDCRYPTO_ZLIBHELPER_HPP
+#pragma once
 
 #include <zlib.h>
 #include <vector>
@@ -41,5 +40,3 @@ namespace gdcrypto::zlib
 	std::vector<uint8_t> deflateBuffer(std::vector<uint8_t> const& buffer);
 	std::vector<uint8_t> inflateBuffer(std::vector<uint8_t> const& buffer);
 }
-
-#endif /* _GDCRYPTO_ZLIBHELPER_HPP */

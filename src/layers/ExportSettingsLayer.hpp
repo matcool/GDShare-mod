@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../offsets.hpp"
+#include <gd.h>
+#include <MinHook.h>
 #include <BrownAlertDelegate.hpp>
 #include <HorizontalSelectMenu.hpp>
 #include <BGCheckbox.hpp>

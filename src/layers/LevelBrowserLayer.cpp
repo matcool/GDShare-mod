@@ -1,6 +1,8 @@
 #include "LevelBrowserLayer.hpp"
 #include "../utils/gdshare.hpp"
 #include "../utils/helpers.hpp"
+#include "../offsets.hpp"
+#include <nfd.h>
 
 std::string* std_string_operator_assign(std::string* str1, char* str2) {
     return as<std::string*(__thiscall*)(std::string*, char*)>(

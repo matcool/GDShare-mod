@@ -1,5 +1,6 @@
 #include "EditLevelLayer.hpp"
 #include "ExportSettingsLayer.hpp"
+#include "../offsets.hpp"
 
 void EditLevelLayer::onExport(cocos2d::CCObject* pSender) {
     ExportSettingsLayer::create(
