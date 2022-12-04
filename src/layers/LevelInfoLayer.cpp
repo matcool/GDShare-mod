@@ -1,37 +1,37 @@
 #include "LevelInfoLayer.hpp"
 #include "EditLevelLayer.hpp"
 
-bool __fastcall LevelInfoLayer::initHook(LevelInfoLayer* _self, uintptr_t, gd::GJGameLevel* _lvl) {
-    if (!init(_self, _lvl))
+bool __fastcall LevelInfoLayer::initHook(LevelInfoLayer* self, uintptr_t, gd::GJGameLevel* lvl) {
+    if (!init(self, lvl))
         return false;
 
     auto exportButton = gd::CCMenuItemSpriteExtra::create(
         makeSpriteOrFallback("BE_Export_File.png", "GJ_downloadBtn_001.png"),
-        _self,
+        self,
         (cocos2d::SEL_MenuHandler)&EditLevelLayer::onExport
     );
-    exportButton->setUserData(_lvl);
+    exportButton->setUserData(lvl);
 
     auto gm = gd::GameManager::sharedState();
-    auto ratePowerSeed = *as<uintptr_t*>(as<uintptr_t>(gm) + 0x2d0);
-    auto ratePowerRand = *as<uintptr_t*>(as<uintptr_t>(gm) + 0x2d4);
+    auto ratePowerSeed = *as<int*>(as<uintptr_t>(gm) + 0x2d0);
+    auto ratePowerRand = *as<int*>(as<uintptr_t>(gm) + 0x2d4);
     auto ratePower = ratePowerSeed - ratePowerRand;
 
-    if (_self->m_pCloneBtn) {
-        _self->m_pCloneBtn->getParent()->addChild(
+    if (self->m_pCloneBtn) {
+        self->m_pCloneBtn->getParent()->addChild(
             exportButton
         );
 
         exportButton->setPosition(
-            _self->m_pCloneBtn->getPositionX(),
-            _self->m_pCloneBtn->getPositionY() + (ratePower ? 100.f : 50.f)
+            self->m_pCloneBtn->getPositionX(),
+            self->m_pCloneBtn->getPositionY() + (ratePower ? 100.f : 50.f)
         );
-    } else if (_self->m_pLikeBtn) {
-        auto menu = _self->m_pLikeBtn->getParent();
-        auto l_ix = menu->getChildren()->indexOfObject(_self->m_pLikeBtn);
+    } else if (self->m_pLikeBtn) {
+        auto menu = self->m_pLikeBtn->getParent();
+        auto l_ix = menu->getChildren()->indexOfObject(self->m_pLikeBtn);
         auto winSize = cocos2d::CCDirector::sharedDirector()->getWinSize();
 
-        auto pos_x = - _self->m_pLikeBtn->getPositionX();
+        auto pos_x = - self->m_pLikeBtn->getPositionX();
         auto pos_y = 0.0f;
 
         for (auto ix = l_ix; ix < menu->getChildrenCount(); ix++) {
@@ -45,7 +45,7 @@ bool __fastcall LevelInfoLayer::initHook(LevelInfoLayer* _self, uintptr_t, gd::G
 
         exportButton->setPosition(pos_x, pos_y + 50.f);
     } else {
-        _self->m_pPlayBtnMenu->addChild(exportButton);
+        self->m_pPlayBtnMenu->addChild(exportButton);
 
         exportButton->setPosition(-80.0f, 0.0f);
     }

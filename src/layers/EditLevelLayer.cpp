@@ -10,46 +10,24 @@ void EditLevelLayer::onExport(cocos2d::CCObject* pSender) {
     )->show();
 }
 
-bool __fastcall EditLevelLayer::initHook(EditLevelLayer* _self, uintptr_t, gd::GJGameLevel* _lvl) {
-    if (!init(_self, _lvl))
+bool __fastcall EditLevelLayer::initHook(EditLevelLayer* self, uintptr_t, gd::GJGameLevel* level) {
+    if (!init(self, level))
         return false;
-    
-    cocos2d::CCArray* children = _self->getChildren();
-
-    cocos2d::CCMenu* m = ((cocos2d::CCMenu*)children->objectAtIndex(14));
 
     auto exportButton = gd::CCMenuItemSpriteExtra::create(
         makeSpriteOrFallback("BE_Export_File.png", "GJ_downloadBtn_001.png"),
-        _self,
+        self,
         (cocos2d::SEL_MenuHandler)&EditLevelLayer::onExport
     );
-    exportButton->setUserData(_lvl);
-
-    auto folderButton = getChild<gd::CCMenuItemSpriteExtra*>(
-        m, m->getChildrenCount() - 1
-    );
-    auto moveUpButton = getChild<cocos2d::CCNode*>(
-        m, m->getChildrenCount() - 2
-    );
-
-    auto xOffset = getChild<cocos2d::CCNode*>(
-        m, 0
-    )->getPositionX();
-    auto yOffset =  moveUpButton->getPositionY()
-                    - getChild<cocos2d::CCNode*>(
-                        m, m->getChildrenCount() - 3
-                    )->getPositionY();
+    exportButton->setUserData(level);
     
-    exportButton->setPosition(
-        xOffset,
-        moveUpButton->getPositionY() + yOffset
-    );
+    auto* menu = cocos2d::CCMenu::create();
+    menu->addChild(exportButton);
+    self->addChild(menu);
 
-    m->removeChild(folderButton, false);
-    m->addChild(exportButton);
-    m->addChild(folderButton);
-
-    _self->removeChild((cocos2d::CCNode*)children->objectAtIndex(2), true);
+    auto winSize = cocos2d::CCDirector::sharedDirector()->getWinSize();
+    menu->setPosition(ccp(winSize.width - 30.f, 52.f));
+    menu->setZOrder(1);
 
     return true;
 }

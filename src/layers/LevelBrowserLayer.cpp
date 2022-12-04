@@ -210,26 +210,22 @@ void LevelBrowserLayer::onImport(cocos2d::CCObject* pSender) {
     }
 }
 
-bool __fastcall LevelBrowserLayer::initHook(LevelBrowserLayer* _self, uintptr_t, gd::GJSearchObject* _sobj) {
-    if (!init(_self, _sobj))
+bool __fastcall LevelBrowserLayer::initHook(LevelBrowserLayer* self, uintptr_t, gd::GJSearchObject* search) {
+    if (!init(self, search))
         return false;
 
-    if (_sobj->getType() == gd::SearchType::kGJSearchTypeMyLevels) {
-        cocos2d::CCMenu* btnMenu = getChild<cocos2d::CCMenu*>(
-            _self, 8
-        );
-
+    if (search->getType() == gd::SearchType::kGJSearchTypeMyLevels) {
         auto importButton = gd::CCMenuItemSpriteExtra::create(
             makeSpriteOrFallback("BE_Import_File.png", "GJ_plusBtn_001.png"),
-            btnMenu,
+            self,
             (cocos2d::SEL_MenuHandler)&LevelBrowserLayer::onImport
         );
 
-        cocos2d::CCNode* newBtn = getChild<cocos2d::CCNode*>(btnMenu, 0);
-
-        btnMenu->addChild(importButton);
-
-        importButton->setPosition(newBtn->getPositionX(), newBtn->getPositionY() + 60.0f);
+        auto* menu = cocos2d::CCMenu::create();
+        menu->addChild(importButton);
+        auto winSize = cocos2d::CCDirector::sharedDirector()->getWinSize();
+        menu->setPosition(ccp(winSize.width - 30.f, 100.f));
+        self->addChild(menu);
     }
 
     return true;
