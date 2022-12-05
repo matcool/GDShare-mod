@@ -20,14 +20,11 @@ class ExportResultHandler : public gd::FLAlertLayerProtocol {
 class ExportSettingsLayer : public BrownAlertDelegate {
     protected:
         gd::GJGameLevel* m_pLevel;
-        HorizontalSelectMenu* m_pHorizontalMenu;
-        InputNode* m_pPathInput;
         BGCheckbox* m_pIncludeSong;
 
         void setup() override;
 
         void onClose(cocos2d::CCObject*);
-        void onSelectPath(cocos2d::CCObject*);
         void onInfo(cocos2d::CCObject*);
         void onExport(cocos2d::CCObject*);
 
