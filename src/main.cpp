@@ -10,10 +10,12 @@
 
 void mod_main(HMODULE) {
     MH_Initialize();
-    matdash::create_console();
-    std::cout << "god i hate gdmake" << std::endl;
-    EditLevelLayer::loadHook();
+    // matdash::create_console();
+    // std::cout << "god i hate gdmake" << std::endl;
+    
+	EditLevelLayer::loadHook();
     LevelBrowserLayer::loadHook();
     LevelInfoLayer::loadHook();
+	
     MH_EnableHook(MH_ALL_HOOKS);
 }
