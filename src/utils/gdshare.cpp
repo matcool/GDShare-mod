@@ -233,6 +233,7 @@ gdshare::Result<std::string> gdshare::loadLevelFromFile(
     type = type.substr(1);
 
     switch (h$(type.c_str())) {
+#if 0
         case h$(gdshare::getExportTypeString(ExportFormat::gmd2)): {
             zipper::Unzipper zip (_path);
 
@@ -301,6 +302,7 @@ gdshare::Result<std::string> gdshare::loadLevelFromFile(
 
             return { true, data };
         } break;
+#endif
 
         case h$(gdshare::getExportTypeString(ExportFormat::gmd)): {
             std::string data = readFileString(_path);
